@@ -140,4 +140,146 @@ console.log(prototypeProps);
 [ 'name' ]
 [ 'numLegs' ]
 ```
+## Constructor property in oobs 
+//code
+```
+function Dog(name) {
+  this.name = name;
+}
+
+// Only change code below this line
+function joinDogFraternity(candidate) {
+if(candidate.constructor === Dog){
+    return true;
+ } else {
+    return false;
+ }
+}
+```
+### Output:
+```
+true
+```
+##  Set the Constructor Property when Changing the Prototype
+//code
+
+```function Dog(name) {function Dog(name) {
+  this.name = name;
+}
+
+let beagle = new Dog("Snoopy");
+
+// Only change code below this line
+
+Dog.prototype.isPrototypeOf(beagle);
+  this.name = name;
+}
+
+let beagle = new Dog("Snoopy");
+
+// Only change code below this line
+
+Dog.prototype.isPrototypeOf(beagle);
+ function Dog(name) {
+  this.name = name;
+}
+Dog.prototype = {
+  constructor: Dog,
+  numLegs: 4,
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+```
+
+## Understand Where an Object’s Prototype Comes From
+//code
+
+```
+function Dog(name) {
+  this.name = name;
+}
+let beagle = new Dog("Snoopy");
+Dog.prototype.isPrototypeOf(beagle);
+```
+
+### Output
+```
+true
+```
+## Use Inheritance So You Don't Repeat Yourself
+
+There's a principle in programming called Don't Repeat Yourself (DRY). The reason repeated code is a problem is because any change requires fixing code in multiple places. This usually means more work for programmers and more room for errors.
+
+//code
+```
+function Cat(name) {
+  this.name = name;
+}
+
+Cat.prototype = {
+  constructor: Cat,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+function Bear(name) {
+  this.name = name;
+}
+
+Bear.prototype = {
+  constructor: Bear,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal,
+eat: function() {
+    console.log("nom nom nom");
+  }            
+};
+//Since Animal includes the describe method, you can remove it from Bear and Cat:
+Bear.prototype = {
+  constructor: Bear
+};
+
+Cat.prototype = {
+  constructor: Cat
+};
+```
+## Override Inherited Methods
+//code 
+```
+function Bird() { }
+
+Bird.prototype.fly = function() { return "I am flying!"; };
+
+function Penguin() { }
+Penguin.prototype = Object.create(Bird.prototype);
+Penguin.prototype.constructor = Penguin;
+
+// Only change code below this line
+Penguin.prototype.fly = function(){
+return "Alas, this is a flightless bird.";
+}
+
+// Only change code above this line
+
+let penguin = new Penguin();
+console.log(penguin.fly());
+```
+### Optput
+
+```
+Alas, this is a flightless bird.
+```
+
 ## 
